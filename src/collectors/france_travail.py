@@ -91,20 +91,22 @@ class FranceTravailCollector(BaseJobCollector):
         # Requêtes calibrées pour France Travail v2 (natureContrat=FS correspond à Stage / Formation)
         queries: List[Dict[str, str]] = []
 
-        # 1. Par département avec mot-clé informatique / data
+        # 1. Par département avec mot-clé explicite stage + domaine
         for dept in target_departments:
-            queries.append({"natureContrat": "FS", "departement": dept, "motsCles": "informatique"})
-            queries.append({"natureContrat": "FS", "departement": dept, "motsCles": "data"})
-            queries.append({"departement": dept, "motsCles": "stage informatique"})
-            queries.append({"departement": dept, "motsCles": "stage data"})
+            queries.append({"natureContrat": "FS", "departement": dept, "motsCles": "stage informatique"})
+            queries.append({"natureContrat": "FS", "departement": dept, "motsCles": "stage data"})
+            queries.append({"natureContrat": "FS", "departement": dept, "motsCles": "stage python"})
+            queries.append({"departement": dept, "motsCles": "stage developpeur"})
+            queries.append({"departement": dept, "motsCles": "stage data engineer"})
 
-        # 2. Requêtes nationales sur les technologies clés
+        # 2. Requêtes nationales axées stage sur les technologies clés
         queries.extend([
-            {"natureContrat": "FS", "motsCles": "python"},
-            {"natureContrat": "FS", "motsCles": "data engineer"},
-            {"natureContrat": "FS", "motsCles": "intelligence artificielle"},
-            {"motsCles": "stage developpeur python"},
-            {"motsCles": "stage machine learning"},
+            {"natureContrat": "FS", "motsCles": "stage python"},
+            {"natureContrat": "FS", "motsCles": "stage data engineer"},
+            {"natureContrat": "FS", "motsCles": "stage intelligence artificielle"},
+            {"natureContrat": "FS", "motsCles": "stage machine learning"},
+            {"motsCles": "stage BUT informatique"},
+            {"motsCles": "stage fin d'etudes informatique"},
         ])
 
         for q_params in queries:

@@ -3,18 +3,18 @@
     "name": "Bastien Poissonnet",
     "email": "bastien.poissonnet@gmail.com",
     "phone": "06 01 46 18 43",
-    "location": "Moutiers-les-Mauxfaits (85) / La Rochelle (17)",
-    "school": "IUT de La Rochelle",
+    "location": "16 rue du Petit Banc, 79000 Niort",
+    "school": "IUT de La Rochelle - Antenne de Niort (Niortech)",
     "degree": "BUT Informatique (3ème année)",
-    "specialty": "Data et Intelligence Artificielle",
-    "driving_license": "Permis B",
+    "specialty": "DATA / IA (Administration, Gestion et Exploitation des Données)",
+    "driving_license": "Permis de conduire (B)",
     "english_level": "B1 (Woofing UK, séjours Allemagne/Espagne)",
-    "interests": ["Informatique", "Travail d'équipe", "Football", "Padel", "Course à pied"]
+    "interests": ["Informatique", "Travail d'équipe", "Football", "Padel", "Course à pied", "Vélo"]
   },
   "search_criteria": {
-    "internship_period": "22 mars 2027 - fin juin 2027 (14-15 semaines)",
+    "internship_period": "22 mars 2027 - 25 juin 2027 (14 semaines)",
     "start_date": "2027-03-22",
-    "end_date": "2027-06-30",
+    "end_date": "2027-06-25",
     "duration_weeks": 14,
     "target_roles": [
       "Stage Data Engineer",
@@ -46,14 +46,17 @@
       "Machine Learning",
       "Deep Learning",
       "ETL",
-      "Pipeline"
+      "Pipeline",
+      "PowerBI"
     ],
     "secondary": [
       "Rust",
       "C++",
       "C",
+      "C#",
       "React",
       "JavaScript",
+      "HTML/CSS",
       "Git",
       "Bash",
       "Linux",
@@ -67,10 +70,16 @@
   },
   "experiences": [
     {
-      "role": "Développeur",
+      "role": "Projet tutoré 2026-2027 (Équipe de 4)",
+      "company": "IUT de La Rochelle - Niortech",
+      "period": "2026-2027",
+      "summary": "Entraînement de modèles d'IA pour rendre autonome un bras robot LeRobot qui a pour objectif de trier des déchets (création de datasets sur mesure, entraînement, test, enrichissement ou correction)."
+    },
+    {
+      "role": "Développeur (Stage BUT 2ème année de 3 mois)",
       "company": "Orisha",
       "period": "7 avril - 26 juin 2026",
-      "summary": "Éditeur européen de logiciels de gestion et solutions métiers SaaS. Travail en environnement professionnel, cycle de développement et intégration."
+      "summary": "Éditeur européen de logiciels de gestion. Migration d'une application locale en Web de gestion de maquette pdf (C#). Automatisation de la création de comptes utilisateurs WordPress pour l'aide en ligne du logiciel de gestion immobilière Wipimo. Travail en binôme, réalisation de sprints."
     },
     {
       "role": "Développeur (Immersion)",

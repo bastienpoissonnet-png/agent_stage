@@ -26,6 +26,7 @@ class CsvTracker:
         "Lien",
         "Compétences",
         "Accroche",
+        "Lettre",
     ]
 
     def __init__(self, file_path: Path = settings.csv_output_path):
@@ -62,6 +63,9 @@ class CsvTracker:
                 old_status = existing[offer.id].get("Statut")
                 if old_status and old_status != "À contacter":
                     row["Statut"] = old_status
+                # Conserver la lettre déjà générée lors d'un scan précédent
+                if not row.get("Lettre"):
+                    row["Lettre"] = existing[offer.id].get("Lettre", "")
             else:
                 new_count += 1
             existing[offer.id] = row

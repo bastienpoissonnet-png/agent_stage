@@ -1,4 +1,4 @@
-"""Modèles de données pour la campagne de candidatures spontanées."""
+﻿"""Modèles de données pour la campagne de candidatures spontanées."""
 
 from typing import Optional
 from pydantic import BaseModel
@@ -28,3 +28,5 @@ class SpontaneousApplication(BaseModel):
     status: str = "Prêt à envoyer"
     follow_up_date: Optional[str] = None
     notes: str = ""
+    letter_path: Optional[str] = None
+

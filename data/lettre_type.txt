@@ -1,0 +1,16 @@
+Objet : Candidature Stage de BUT Informatique – Spécialisation DATA/IA (du 22 mars au 25 juin)
+
+Madame, Monsieur,
+
+Je vous écris suite à l'intérêt que porte {nom_entreprise} pour {accroche_entreprise}, domaines qui résonnent fortement avec mon parcours actuel. Étudiant en 3ème année de BUT Informatique à l'IUT de La Rochelle sur le site de Niort (Niortech), j'ai choisi la spécialisation DATA/IA (Administration, Gestion et Exploitation des Données) afin de maîtriser l'ensemble de la chaîne de valeur de l'information. Cette formation me confère une solide base en développement logiciel (HTML/CSS, JavaScript, Python, SQL) tout en me spécialisant dans le traitement avancé des données et l'intégration de solutions basées sur l'Intelligence Artificielle.
+
+{phrase_offre}Je suis activement à la recherche d'un stage de 14 semaines, du 22 mars au 25 juin, afin de concrétiser ces acquis théoriques. Intégrer votre structure, particulièrement au sein de {equipe_cible}, me motive fortement pour contribuer à des projets d'envergure tels que {projets_vises}.
+
+Mon stage de 3 mois effectué en fin de 2ème année chez Orisha (du 7 avril au 26 juin 2026), éditeur européen de logiciels de gestion, ainsi que mes expériences chez Wipimo et Cistébois, m'ont permis de renforcer ma maîtrise du développement, d'appréhender le travail en équipe et d'acquérir une réelle rigueur méthodologique dans la conduite de projets informatiques.{phrase_projet}
+
+Je souhaite apporter à votre équipe une méthodologie rigoureuse, une capacité d'apprentissage rapide et une proactivité concrète, notamment dans l'automatisation de traitements de données, le développement d'applications intégrant l'IA et la production de documentation technique.
+
+Dans l'attente de vous lire ou de vous rencontrer pour échanger davantage sur cette opportunité de stage, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+
+Cordialement,
+Bastien POISSONNET

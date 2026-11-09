@@ -22,7 +22,11 @@ class SmtpMailer:
     def __init__(self, dry_run: bool = True):
         self.dry_run = dry_run
         self.smtp_settings = settings.smtp
-        self.cv_path: Path = settings.project_root / "cv.pdf"
+        candidates = [
+            settings.project_root / "CV_Bastien_Poissonnet.pdf",
+            settings.project_root / "cv.pdf",
+        ]
+        self.cv_path: Path = next((p for p in candidates if p.exists()), candidates[0])
 
     def send_application(self, app: SpontaneousApplication) -> bool:
         """Envoie une candidature spontanée par email (ou simule l'envoi en dry-run)."""
@@ -32,7 +36,7 @@ class SmtpMailer:
         if self.dry_run:
             logger.info(
                 f"[DRY-RUN] Email simulé pour {app.company_name} ({app.contact_email}) : "
-                f"Objet='{app.subject}' | PJ={'cv.pdf' if self.cv_path.exists() else 'Aucune'}"
+                f"Objet='{app.subject}' | PJ={'lettre + ' if app.letter_path else ''}{self.cv_path.name if self.cv_path.exists() else 'CV introuvable'}"
             )
             return True
 
@@ -52,6 +56,17 @@ class SmtpMailer:
 
             # Corps du message en texte brut
             msg.attach(MIMEText(app.body, "plain", "utf-8"))
+
+            # Lettre de motivation personnalisée en pièce jointe
+            if app.letter_path and Path(app.letter_path).exists():
+                with open(app.letter_path, "rb") as f:
+                    letter = MIMEApplication(f.read(), _subtype="pdf")
+                    letter.add_header(
+                        "Content-Disposition",
+                        "attachment",
+                        filename="Lettre_Motivation_Bastien_Poissonnet.pdf",
+                    )
+                    msg.attach(letter)
 
             # Ajout de la pièce jointe cv.pdf si présente
             if self.cv_path.exists():
@@ -86,3 +101,4 @@ class SmtpMailer:
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du mail à {app.company_name} : {e}")
             return False
+

@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import re
 import logging
 from pathlib import Path
 from typing import List, Optional
@@ -12,6 +13,7 @@ from rich.prompt import Confirm
 from rich.table import Table
 
 from config.settings import settings
+from src.letters import LetterContext, LetterGenerator
 from src.spontaneous.mailer import SmtpMailer
 from src.spontaneous.models import SpontaneousApplication, TargetCompany
 from src.spontaneous.pitch_generator import SpontaneousPitchGenerator
@@ -79,8 +81,12 @@ def run_campaign(
     # 1. Génération des messages d'accroche
     generator = SpontaneousPitchGenerator()
     applications: List[SpontaneousApplication] = []
+    letter_gen = LetterGenerator()
     for c in companies:
         app = generator.generate_application(c)
+        # Lettre de motivation personnalisée (PDF) générée à partir du modèle type
+        ctx = LetterContext(company=re.sub(r"\s*\(.*?\)", "", c.name).strip(), address=c.city, sector=c.sector)
+        app.letter_path = str(letter_gen.export_pdf(ctx))
         applications.append(app)
 
     # 2. Affichage récapitulatif
@@ -161,3 +167,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

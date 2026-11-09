@@ -1,42 +1,22 @@
 # 🎯 Suivi des Candidatures de Stage — BUT 3 Data & IA
 
 > **Candidat :** Bastien Poissonnet  
-> **Période cible :** 22 mars 2027 - fin juin 2027 (14-15 semaines)  
+> **Période cible :** 22 mars 2027 - 25 juin 2027 (14 semaines)  
 > **Zones cibles :** La Rochelle (17), Niort (79), La Roche-sur-Yon (85), Paris / IDF (75)  
 > **Mode :** Présentiel ou Hybride (Full remote exclu)  
-> **Dernière mise à jour :** 05/10/2026 à 23:25
+> **Dernière mise à jour :** 09/11/2026 à 23:15
 
 ## 📊 Tableau de Bord des Offres Détectées (KPIs)
 
-- **Total d'offres qualifiées :** `21`
-- **Offres à fort intérêt (Score ≥ 50) :** `17`
-- **Répartition des statuts :** **À contacter :** `21`
+- **Total d'offres qualifiées :** `1`
+- **Offres à fort intérêt (Score ≥ 50) :** `0`
+- **Répartition des statuts :** **À contacter :** `1`
 
 ## 🚀 Top Offres Publiées (Présentiel & Hybride)
 
 | Score | Statut | Poste | Entreprise | Lieu | Source | Lien |
 | :---: | :---: | :--- | :--- | :--- | :---: | :---: |
-| **80** | `À contacter` | Alternance Software Engineer IA & B | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6930081) |
-| **75** | `À contacter` | Alternance Data Analyst & Développe | Confidentiel / Non spécif | 92 - Puteaux | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6344763) |
-| **65** | `À contacter` | Alternance - Stress-test et ICAAP F | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7425844) |
-| **60** | `À contacter` | Alternance Data Analyste CRM - (f/h | Eckes-Granini France SNC | 75 - Paris 12e Arrondissement | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7604312) |
-| **60** | `À contacter` | Alternance Cybersécurité H/F | Confidentiel / Non spécif | Île-de-France | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6207904) |
-| **60** | `À contacter` | Alternance Développeur Fullstack PH | Confidentiel / Non spécif | 92 - Boulogne-Billancourt | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7627104) |
-| **60** | `À contacter` | Alternance Développeur Web Full Sta | Confidentiel / Non spécif | 92 - Suresnes | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/5901927) |
-| **55** | `À contacter` | Alternace - Business analyst F/H | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7425801) |
-| **55** | `À contacter` | Alternance Data Analyst - - Paris ( | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7165144) |
-| **55** | `À contacter` | Alternance Ingénieur Data / IA - Pa | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6966339) |
-| **55** | `À contacter` | Alternance Data Analyst Clients - - | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6799647) |
-| **55** | `À contacter` | Chef de Projet IA & Product Builder | RIPPLE MOTION SERVICES | 44 - SAINT-HERBLAIN | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/214SRLJ) |
-| **55** | `À contacter` | Chef(fe) de Projets Programmation e | IN'LI | 92 - Puteaux | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6942558) |
-| **55** | `À contacter` | Alternance Ingénieur Dev Ops Full s | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6306640) |
-| **50** | `À contacter` | Technicien support HelpDesk - Alter | EXPONENS | 75 - Paris 12e Arrondissement | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/213QKSG) |
-| **50** | `À contacter` | Technicien support HelpDesk - Alter | EXPONENS | 75 - Paris 12e Arrondissement | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/213QKRR) |
-| **50** | `À contacter` | Alternance Développeur C# .net - Fo | Confidentiel / Non spécif | 94 - Fontenay-sous-Bois | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7627183) |
-| **45** | `À contacter` | Apprenti technicien en informatique | Nexia S&A | 75 - Paris 17e Arrondissement | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7672619) |
-| **45** | `À contacter` | Alternance Technicien support infor | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7556437) |
-| **45** | `À contacter` | Alternance Assistant responsable mu | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/6729314) |
-| **45** | `À contacter` | Alternance assistant(e) BI reportin | Confidentiel / Non spécif | 75 - Paris | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7165124) |
+| **40** | `À contacter` | Stage de fin d'études / Alternance  | Confidentiel / Non spécif | 92 - Nanterre | France Travail | [Voir l'offre](https://candidat.francetravail.fr/offres/recherche/detail/7093035) |
 
 ---
 
@@ -44,393 +24,33 @@
 
 *(Clique sur une offre pour déplier le message d'accroche prêt à envoyer)*
 
-### 1. [80 pts] Alternance Software Engineer IA & Backend - Paris (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `C++ / C, Data / IA, Docker, Git, Python`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6930081](https://candidat.francetravail.fr/offres/recherche/detail/6930081)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +5: Compétence complémentaire (C++ / C)<br>• +10: Compétence cœur (Data / IA)<br>• +5: Compétence complémentaire (Docker)<br>• +5: Compétence complémentaire (Git)<br>• +10: Compétence cœur (Python)<br>• +20: Pôle Paris / Île-de-France
+### 1. [40 pts] Stage de fin d'études / Alternance - Sujet de stage : Transformation SI : transformer les SI pour répondre aux nouveaux enjeux du monde industriel et énergétique  (H/F) — Confidentiel / Non spécifié
+- **Localisation :** 92 - Nanterre (Présentiel / Sur site)
+- **Compétences détectées :** `Agile / Scrum, C++ / C, Data / IA`
+- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7093035](https://candidat.francetravail.fr/offres/recherche/detail/7093035)
+- **Détail du scoring :** <br>• +35: Intitulé de stage explicite<br>• +5: Compétence complémentaire (Agile / Scrum)<br>• +5: Compétence complémentaire (C++ / C)<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France<br>• +10: Secteur éditeur de logiciels / SaaS (expérience Orisha)<br>• -45: Mention d'alternance/apprentissage (recherche stricte de stage conventionné)
 
 <details>
 <summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
 
 ```text
-Bonjour,
+Objet : Candidature Stage de BUT Informatique – Spécialisation DATA/IA (du 22 mars au 25 juin)
 
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Software Engineer IA & Backend - Paris (F/H) au sein de votre équipe.
+Madame, Monsieur,
 
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (C++ / C, Data / IA, Docker, Git, Python) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
+Je vous écris suite à l'intérêt que porte votre entreprise pour l'innovation et la gestion de projets techniques, domaines qui résonnent fortement avec mon parcours actuel. Étudiant en 3ème année de BUT Informatique à l'IUT de La Rochelle sur le site de Niort (Niortech), j'ai choisi la spécialisation DATA/IA (Administration, Gestion et Exploitation des Données) afin de maîtriser l'ensemble de la chaîne de valeur de l'information. Cette formation me confère une solide base en développement logiciel (HTML/CSS, JavaScript, Python, SQL) tout en me spécialisant dans le traitement avancé des données et l'intégration de solutions basées sur l'Intelligence Artificielle.
 
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
+Votre offre « Stage de fin d'études / Alternance - Sujet de stage : Transformation SI : transformer les SI pour répondre aux nouveaux enjeux du monde industriel et énergétique » a particulièrement retenu mon attention, notamment par les technologies que je pratique déjà (C++). Je suis activement à la recherche d'un stage de 14 semaines, du 22 mars au 25 juin, afin de concrétiser ces acquis théoriques. Intégrer votre structure, particulièrement au sein de l'équipe Data et IA, me motive fortement pour contribuer à des projets d'envergure tels que l'optimisation des processus métiers, le développement d'outils d'aide à la décision, la mise en place de modèles prédictifs et le déploiement d'outils basés sur l'IA.
 
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
+Mon stage de 3 mois effectué en fin de 2ème année chez Orisha (du 7 avril au 26 juin 2026), éditeur européen de logiciels de gestion, ainsi que mes expériences chez Wipimo et Cistébois, m'ont permis de renforcer ma maîtrise du développement, d'appréhender le travail en équipe et d'acquérir une réelle rigueur méthodologique dans la conduite de projets informatiques. Mon projet tutoré 2026-2027, mené en équipe de 4, consiste à entraîner des modèles d'IA pour rendre autonome un bras robot LeRobot chargé de trier des déchets (création de datasets sur mesure, entraînement, test, enrichissement ou correction), ce qui m'a directement confronté aux enjeux concrets de la donnée et de l'IA.
 
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
+Je souhaite apporter à votre équipe une méthodologie rigoureuse, une capacité d'apprentissage rapide et une proactivité concrète, notamment dans l'automatisation de traitements de données, le développement d'applications intégrant l'IA et la production de documentation technique.
 
-### 2. [75 pts] Alternance Data Analyst & Développeur SaaS (R, Python, Azure) - Puteaux (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 92 - Puteaux (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA, Python`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6344763](https://candidat.francetravail.fr/offres/recherche/detail/6344763)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +10: Compétence cœur (Python)<br>• +20: Pôle Paris / Île-de-France<br>• +10: Secteur éditeur de logiciels / SaaS (expérience Orisha)
+Dans l'attente de vous lire ou de vous rencontrer pour échanger davantage sur cette opportunité de stage, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
 
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
+Cordialement,
+Bastien POISSONNET
 
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Data Analyst & Développeur SaaS (R, Python, Azure) - Puteaux (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA, Python) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 3. [65 pts] Alternance - Stress-test et ICAAP F/H — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA, Python`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7425844](https://candidat.francetravail.fr/offres/recherche/detail/7425844)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +10: Compétence cœur (Python)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance - Stress-test et ICAAP F/H au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA, Python) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 4. [60 pts] Alternance Data Analyste CRM - (f/h) (H/F) — Eckes-Granini France SNC
-- **Localisation :** 75 - Paris 12e Arrondissement (Présentiel / Sur site)
-- **Compétences détectées :** `C++ / C, Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7604312](https://candidat.francetravail.fr/offres/recherche/detail/7604312)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +5: Compétence complémentaire (C++ / C)<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Eckes-Granini France SNC</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Data Analyste CRM - (f/h) (H/F) au sein de Eckes-Granini France SNC.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (C++ / C, Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 5. [60 pts] Alternance Cybersécurité H/F — Confidentiel / Non spécifié
-- **Localisation :** Île-de-France (Présentiel / Sur site)
-- **Compétences détectées :** `Bash / Linux, Python`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6207904](https://candidat.francetravail.fr/offres/recherche/detail/6207904)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +5: Compétence complémentaire (Bash / Linux)<br>• +10: Compétence cœur (Python)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Cybersécurité H/F au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Bash / Linux, Python) orienté développement d'outils et pipelines Python robustes.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. 
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 6. [60 pts] Alternance Développeur Fullstack PHP/javascript - Boulogne-Billancourt (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 92 - Boulogne-Billancourt (Présentiel / Sur site)
-- **Compétences détectées :** `Docker, Git, React / JS`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7627104](https://candidat.francetravail.fr/offres/recherche/detail/7627104)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +5: Compétence complémentaire (Docker)<br>• +5: Compétence complémentaire (Git)<br>• +5: Compétence complémentaire (React / JS)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Développeur Fullstack PHP/javascript - Boulogne-Billancourt (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Docker, Git, React / JS) au sein de votre environnement technique.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 7. [60 pts] Alternance Développeur Web Full Stack & IA - Suresnes (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 92 - Suresnes (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA, React / JS`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/5901927](https://candidat.francetravail.fr/offres/recherche/detail/5901927)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +5: Compétence complémentaire (React / JS)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Développeur Web Full Stack & IA - Suresnes (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA, React / JS) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 8. [55 pts] Alternace - Business analyst F/H — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7425801](https://candidat.francetravail.fr/offres/recherche/detail/7425801)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternace - Business analyst F/H au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 9. [55 pts] Alternance Data Analyst - - Paris (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/7165144](https://candidat.francetravail.fr/offres/recherche/detail/7165144)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Data Analyst - - Paris (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 10. [55 pts] Alternance Ingénieur Data / IA - Paris (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6966339](https://candidat.francetravail.fr/offres/recherche/detail/6966339)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Ingénieur Data / IA - Paris (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 11. [55 pts] Alternance Data Analyst Clients - - Paris (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6799647](https://candidat.francetravail.fr/offres/recherche/detail/6799647)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Data Analyst Clients - - Paris (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 12. [55 pts] Chef de Projet IA & Product Builder (F/H) - ALAND GROUPE (H/F) — RIPPLE MOTION SERVICES
-- **Localisation :** 44 - SAINT-HERBLAIN (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/214SRLJ](https://candidat.francetravail.fr/offres/recherche/detail/214SRLJ)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour RIPPLE MOTION SERVICES</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Chef de Projet IA & Product Builder (F/H) - ALAND GROUPE (H/F) au sein de RIPPLE MOTION SERVICES.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. 
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 13. [55 pts] Chef(fe) de Projets Programmation et Stratégie Patrimoniale H/F — IN'LI
-- **Localisation :** 92 - Puteaux (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6942558](https://candidat.francetravail.fr/offres/recherche/detail/6942558)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour IN'LI</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Chef(fe) de Projets Programmation et Stratégie Patrimoniale H/F au sein de IN'LI.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 14. [55 pts] Alternance Ingénieur Dev Ops Full stack + AI Agent - Paris (F/H) — Confidentiel / Non spécifié
-- **Localisation :** 75 - Paris (Présentiel / Sur site)
-- **Compétences détectées :** `Data / IA`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/6306640](https://candidat.francetravail.fr/offres/recherche/detail/6306640)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +10: Compétence cœur (Data / IA)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour Confidentiel / Non spécifié</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Alternance Ingénieur Dev Ops Full stack + AI Agent - Paris (F/H) au sein de votre équipe.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (Data / IA) avec un fort intérêt pour le traitement de données et l'implémentation de modèles d'IA.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
-```
-</details>
-
-### 15. [50 pts] Technicien support HelpDesk - Alternance - Paris 12e (H/F) — EXPONENS
-- **Localisation :** 75 - Paris 12e Arrondissement (Présentiel / Sur site)
-- **Compétences détectées :** `C++ / C`
-- **Lien direct :** [https://candidat.francetravail.fr/offres/recherche/detail/213QKSG](https://candidat.francetravail.fr/offres/recherche/detail/213QKSG)
-- **Détail du scoring :** <br>• +25: Stage conventionné<br>• +5: Compétence complémentaire (C++ / C)<br>• +20: Pôle Paris / Île-de-France
-
-<details>
-<summary>👉 <b>Afficher le message d'accroche personnalisé pour EXPONENS</b></summary>
-
-```text
-Bonjour,
-
-Actuellement en 3ème année de BUT Informatique à l'IUT de La Rochelle (spécialité Data & Intelligence Artificielle), je me permets de vous contacter au sujet de votre offre de Technicien support HelpDesk - Alternance - Paris 12e (H/F) au sein de EXPONENS.
-
-À la recherche de mon stage de fin d'études du 22 mars 2027 à fin juin 2027 (14 à 15 semaines), votre opportunité a immédiatement retenu mon attention, notamment en raison des technologies mobilisées (C++ / C) au sein de votre environnement technique.
-
-Lors de mon expérience en tant que développeur chez Orisha (éditeur européen de logiciels de gestion SaaS), j'ai pu consolider ma rigueur de développement en environnement agile/SCRUM et mon goût pour la conception de solutions logicielles performantes. Je suis pleinement mobile en région parisienne pour toute la durée du stage.
-
-Je serais ravi d'échanger 10 à 15 minutes par téléphone ou visio pour vous présenter plus en détail mon parcours et voir comment je peux contribuer à vos projets en cours.
-
-Bien cordialement,
-Bastien Poissonnet
-📞 06 01 46 18 43 | ✉️ bastien.poissonnet@gmail.com
 ```
 </details>
 

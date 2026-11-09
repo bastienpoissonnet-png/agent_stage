@@ -6,6 +6,7 @@ ET la campagne de candidatures spontanées locales (La Rochelle, Niort, Vendée,
 
 import argparse
 import logging
+import re
 import sys
 from typing import List
 
@@ -20,7 +21,7 @@ from src.collectors import (
     FrenchTechCollector,
     WelcomeToTheJungleCollector,
 )
-from src.generator import PitchGenerator
+from src.letters import LetterContext, LetterGenerator
 from src.matcher import JobFilter, JobScorer
 from src.models import JobOffer
 from src.spontaneous.campaign import run_campaign
@@ -94,20 +95,38 @@ def run_job_search(source_filter: str = "all", min_score: int = 40, limit: int =
         f"[bold green]✔[/bold green] [cyan]{len(qualified_offers)}[/cyan] offres qualifiées retenues (Score ≥ {min_score}/100, Présentiel/Hybride)."
     )
 
-    # 4. Enrichissement avec les messages d'accroche
+    # 4. Lettres de motivation personnalisées (uniquement pour les nouvelles offres)
+    new_offers: List[JobOffer] = []
     if qualified_offers:
-        pitch_gen = PitchGenerator()
-        pitch_gen.enrich_offers(qualified_offers)
+        csv_tracker = CsvTracker()
+        known = csv_tracker.load_existing()
+        new_offers = [o for o in qualified_offers if o.id not in known]
+
+        letter_gen = LetterGenerator()
+        for o in qualified_offers:
+            ctx = LetterContext(
+                company=o.company,
+                address=re.sub(r"^\d{2,3}\s*-\s*", "", o.location or ""),
+                job_title=re.sub(r"\s*\((H/F|F/H)\)\s*", " ", o.title).strip(),
+                offer_skills=o.detected_skills,
+                file_stem=f"{o.company}_{o.id[:6]}",
+            )
+            o.personalized_pitch = letter_gen.render(ctx)
+            if o in new_offers or not known.get(o.id, {}).get("Lettre"):
+                try:
+                    o.letter_path = str(letter_gen.export_pdf(ctx))
+                except Exception as e:
+                    logger.error(f"Lettre non générée pour {o.title}: {e}")
 
         # 5. Sauvegarde locale
-        csv_tracker = CsvTracker()
         new_count = csv_tracker.save_offers(qualified_offers)
 
         md_tracker = MarkdownTracker()
         md_tracker.generate_dashboard(qualified_offers)
 
         console.print(
-            f"[bold green]✔[/bold green] Synchronisation : [cyan]{new_count}[/cyan] nouvelles offres ajoutées dans [bold]candidatures.csv[/bold] et [bold]candidatures.md[/bold].\n"
+            f"[bold green]✔[/bold green] Synchronisation : [cyan]{new_count}[/cyan] nouvelles offres ajoutées dans [bold]candidatures.csv[/bold] et [bold]candidatures.md[/bold] "
+            f"([cyan]{len(new_offers)}[/cyan] lettres PDF générées dans [bold]letters/[/bold]).\n"
         )
         display_summary_table(qualified_offers[:10])
     else:
@@ -118,6 +137,8 @@ def run_job_search(source_filter: str = "all", min_score: int = 40, limit: int =
             "Conseil : Renseigne tes clés France Travail dans .env pour interroger le vivier officiel, "
             "ou lance une campagne de candidatures spontanées locales avec :[/bold yellow] [bold green]python main.py --spontaneous[/bold green]"
         )
+
+    return new_offers
 
 
 def display_summary_table(offers: List[JobOffer]):
@@ -149,6 +170,12 @@ def display_summary_table(offers: List[JobOffer]):
 
 def main():
     parser = argparse.ArgumentParser(description="Stage Agent — Veille de stages et candidatures spontanées")
+
+    # Lettre de motivation ponctuelle
+    parser.add_argument("--letter", metavar="ENTREPRISE", help="Générer une lettre de motivation PDF pour cette entreprise")
+    parser.add_argument("--address", default="", help="Adresse de l'entreprise (optionnel, avec --letter)")
+    parser.add_argument("--sector", default="", help="Secteur de l'entreprise : assurance, éditeur, ESN, data... (avec --letter)")
+    parser.add_argument("--job-title", default="", help="Intitulé de l'offre visée (avec --letter)")
 
     # Mode Spontané
     parser.add_argument(
@@ -189,7 +216,20 @@ def main():
 
     args = parser.parse_args()
 
-    if args.spontaneous:
+    if args.letter:
+        from src.letters import LetterContext, LetterGenerator
+
+        ctx = LetterContext(
+            company=args.letter,
+            address=args.address,
+            sector=args.sector,
+            job_title=args.job_title,
+        )
+        gen = LetterGenerator()
+        path = gen.export_pdf(ctx)
+        console.print(Panel(gen.render(ctx), title="Aperçu de la lettre", border_style="green"))
+        console.print(f"[bold green]✔[/bold green] Lettre PDF générée : [bold]{path}[/bold]")
+    elif args.spontaneous:
         run_campaign(dept_filter=args.dept, live_send=args.send)
     else:
         run_job_search(source_filter=args.source, min_score=args.min_score, limit=args.limit)

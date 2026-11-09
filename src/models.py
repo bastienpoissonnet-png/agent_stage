@@ -1,4 +1,4 @@
-"""Modèles de données du pipeline de recherche de stage."""
+﻿"""Modèles de données du pipeline de recherche de stage."""
 
 import hashlib
 from typing import List, Optional
@@ -24,6 +24,7 @@ class JobOffer(BaseModel):
     match_reasons: List[str] = Field(default_factory=list)
     status: str = "À contacter"
     personalized_pitch: str = ""
+    letter_path: str = ""
 
     @classmethod
     def generate_id(cls, source: str, title: str, company: str, url: str) -> str:
@@ -46,4 +47,6 @@ class JobOffer(BaseModel):
             "Lien": self.url,
             "Compétences": ", ".join(self.detected_skills),
             "Accroche": self.personalized_pitch.replace("\n", " "),
+            "Lettre": self.letter_path,
         }
+

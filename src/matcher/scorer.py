@@ -116,6 +116,14 @@ class JobScorer:
             score += 10
             reasons.append("+10: Secteur éditeur de logiciels / SaaS (expérience Orisha)")
 
+        # 6. Pénalité forte si mention d'alternance ou apprentissage (Bastien cherche un stage de fin d'études pur)
+        if any(
+            re.search(r"\b" + kw + r"\b", full_text)
+            for kw in ["alternance", "alternant", "alternante", "apprentissage", "apprenti", "contrat pro"]
+        ):
+            score -= 45
+            reasons.append("-45: Mention d'alternance/apprentissage (recherche stricte de stage conventionné)")
+
         # Bornage 0 - 100
         final_score = max(0, min(100, score))
         offer.score = final_score

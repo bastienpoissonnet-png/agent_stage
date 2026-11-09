@@ -79,11 +79,27 @@ class JobFilter:
             "work from anywhere",
         ]
 
+        # Signaux d'alternance et apprentissage à exclure pour un stage de fin d'études
+        self.alternance_patterns = [
+            r"\balternan[ct]e?s?\b",
+            r"\balternace\b",  # Faute de frappe fréquente dans les annonces
+            r"\bapprenti[es]?\b",
+            r"\bapprentissage\b",
+            r"\bcontrat\s+pro\b",
+            r"\bcontrat\s+de\s+pro\b",
+            r"\bcontrat\s+de\s+professionnalisation\b",
+            r"\bcontrat\s+d['’]apprentissage\b",
+            r"\bformation\s+en\s+alternance\b",
+            r"\brythme\s+d['’]alternance\b",
+            r"\bcalendrier\s+d['’]alternance\b",
+        ]
+
         # Mots-clés rédhibitoires dans la description
         self.strict_exclusion_keywords = [
             "uniquement en alternance",
             "contrat d'apprentissage uniquement",
             "contrat pro uniquement",
+            "pas de stage",
             "5 ans d'expérience minimum",
         ]
 
@@ -121,7 +137,40 @@ class JobFilter:
                 logger.debug(f"Offre full remote écartée (pas de ville cible) : {offer.title}")
                 return False
 
-        # 4. Vérification des exclusions de contrat (alternance pure, etc.)
+        # 4. Exclusion stricte des alternances et contrats d'apprentissage
+        # Bastien cherche STRICTEMENT un stage conventionné de fin d'études (mars à juin 2027)
+        has_alternance_signal = any(
+            re.search(pat, text_lower) for pat in self.alternance_patterns
+        )
+        if has_alternance_signal:
+            has_stage_in_title = any(
+                re.search(r"\b" + kw + r"\b", title_lower)
+                for kw in ["stage", "stagiaire", "intern", "internship", "pfe"]
+            )
+            has_alternance_in_title = any(
+                re.search(pat, title_lower) for pat in self.alternance_patterns
+            )
+
+            # Si le titre indique une alternance sans mentionner stage (ex: "Alternance Data Analyst")
+            if has_alternance_in_title and not has_stage_in_title:
+                logger.debug(f"Offre d'alternance pure écartée (titre) : {offer.title}")
+                return False
+
+            # Si la description ne mentionne pas explicitement la possibilité d'un stage
+            stage_open_patterns = [
+                r"\bstage\s+(ou|/|\&|et)\s+alternan",
+                r"\balternan[ct]e?\s+(ou|/|\&|et)\s+stage",
+                r"\bouvert\s+au[x]?\s+stage",
+                r"\bconvention\s+de\s+stage\b",
+                r"\bstage\s+de\s+fin\s+d['’]études\b",
+                r"\bstage\b",
+            ]
+            is_open_to_stage = any(re.search(pat, text_lower) for pat in stage_open_patterns)
+            if not is_open_to_stage:
+                logger.debug(f"Offre alternance sans mention de stage écartée : {offer.title}")
+                return False
+
+        # 5. Vérification des exclusions de contrat strictes
         for excl in self.strict_exclusion_keywords:
             if excl in text_lower:
                 logger.debug(f"Offre exclue ({excl}): {offer.title}")
