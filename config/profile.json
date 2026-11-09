@@ -1,0 +1,88 @@
+{
+  "candidate": {
+    "name": "Bastien Poissonnet",
+    "email": "bastien.poissonnet@gmail.com",
+    "phone": "06 01 46 18 43",
+    "location": "Moutiers-les-Mauxfaits (85) / La Rochelle (17)",
+    "school": "IUT de La Rochelle",
+    "degree": "BUT Informatique (3ème année)",
+    "specialty": "Data et Intelligence Artificielle",
+    "driving_license": "Permis B",
+    "english_level": "B1 (Woofing UK, séjours Allemagne/Espagne)",
+    "interests": ["Informatique", "Travail d'équipe", "Football", "Padel", "Course à pied"]
+  },
+  "search_criteria": {
+    "internship_period": "22 mars 2027 - fin juin 2027 (14-15 semaines)",
+    "start_date": "2027-03-22",
+    "end_date": "2027-06-30",
+    "duration_weeks": 14,
+    "target_roles": [
+      "Stage Data Engineer",
+      "Stage Développeur Data & IA",
+      "Stage Machine Learning",
+      "Stage Développeur Backend Python",
+      "Stage Développeur Rust / C++",
+      "Stage Informatique Décisionnelle / BI"
+    ],
+    "target_locations": [
+      "La Rochelle",
+      "Niort",
+      "La Roche-sur-Yon",
+      "Paris",
+      "Île-de-France"
+    ],
+    "target_departments": ["17", "79", "85", "75", "92", "93", "94"],
+    "allow_remote": false,
+    "disallow_full_remote": true,
+    "prefer_onsite_or_hybrid": true
+  },
+  "skills": {
+    "core": [
+      "Python",
+      "SQL",
+      "Elasticsearch",
+      "Data",
+      "Intelligence Artificielle",
+      "Machine Learning",
+      "Deep Learning",
+      "ETL",
+      "Pipeline"
+    ],
+    "secondary": [
+      "Rust",
+      "C++",
+      "C",
+      "React",
+      "JavaScript",
+      "Git",
+      "Bash",
+      "Linux",
+      "Docker",
+      "API REST"
+    ],
+    "methodology": [
+      "Agile",
+      "SCRUM"
+    ]
+  },
+  "experiences": [
+    {
+      "role": "Développeur",
+      "company": "Orisha",
+      "period": "7 avril - 26 juin 2026",
+      "summary": "Éditeur européen de logiciels de gestion et solutions métiers SaaS. Travail en environnement professionnel, cycle de développement et intégration."
+    },
+    {
+      "role": "Développeur (Immersion)",
+      "company": "Wipimo",
+      "period": "2020/2021",
+      "summary": "Logiciel de gestion locative immobilière, découverte des architectures logicielles."
+    },
+    {
+      "role": "Séjour international",
+      "company": "Woofing Angleterre & Erasmus",
+      "period": "2024-2025",
+      "summary": "Immersion linguistique complète, autonomie et communication interculturelle."
+    }
+  ]
+}
