@@ -50,6 +50,14 @@ class JobFilter:
             "vendeuse",
             "employé commercial",
             "conducteur",
+            "ingénieur d'affaires",
+            "ingenieur d'affaires",
+            "relation client",
+            "stage 3eme",
+            "stage 3e",
+            "stage de 3ème",
+            "stage découverte",
+            "stage d'observation",
         ]
 
         # Postes à responsabilité / seniors
@@ -187,10 +195,6 @@ class JobFilter:
         for target in self.target_locations:
             if target in loc_lower:
                 return True
-
-        # Si l'offre provient de France Travail mais sans localisation précise, vérifions si elle est en région cible
-        if offer.source == "France Travail" and offer.department in self.target_depts:
-            return True
 
         logger.debug(f"Offre hors secteur géographique présentiel ({offer.location}): {offer.title}")
         return False

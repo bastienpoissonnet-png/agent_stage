@@ -1,12 +1,12 @@
-"""Module de collecte des offres d'emploi et de stage."""
+"""Module de collecte des offres de stage."""
 from .base import BaseJobCollector
-from .france_travail import FranceTravailCollector
-from .wttj import WelcomeToTheJungleCollector
-from .french_tech import FrenchTechCollector
+from .hellowork import HelloWorkCollector
+from .un_jeune_une_solution import UnJeuneUneSolutionCollector
+from .web_search import WebSearchCollector
 
 __all__ = [
     "BaseJobCollector",
-    "FranceTravailCollector",
-    "WelcomeToTheJungleCollector",
-    "FrenchTechCollector",
+    "HelloWorkCollector",
+    "UnJeuneUneSolutionCollector",
+    "WebSearchCollector",
 ]

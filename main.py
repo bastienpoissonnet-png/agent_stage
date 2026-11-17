@@ -1,6 +1,6 @@
 """Point d'entrée principal (CLI) du Stage Agent.
 
-Orchestre la recherche de stage ciblée (France Travail / French Tech)
+Orchestre la recherche de stage ciblée (HelloWork / 1jeune1solution / Recherche Web)
 ET la campagne de candidatures spontanées locales (La Rochelle, Niort, Vendée, Paris).
 """
 
@@ -17,14 +17,14 @@ from rich.table import Table
 
 from config.settings import settings
 from src.collectors import (
-    FranceTravailCollector,
-    FrenchTechCollector,
-    WelcomeToTheJungleCollector,
+    HelloWorkCollector,
+    UnJeuneUneSolutionCollector,
+    WebSearchCollector,
 )
 from src.letters import LetterContext, LetterGenerator
 from src.matcher import JobFilter, JobScorer
 from src.models import JobOffer
-from src.spontaneous.campaign import run_campaign
+from src.spontaneous.campaign import run_campaign, run_followups
 from src.storage import CsvTracker, MarkdownTracker
 
 # Configuration des logs
@@ -56,12 +56,12 @@ def run_job_search(source_filter: str = "all", min_score: int = 40, limit: int =
     display_banner()
 
     collectors = []
-    if source_filter in ("all", "ft", "france_travail"):
-        collectors.append(FranceTravailCollector())
-    if source_filter in ("all", "wttj", "welcome_to_the_jungle"):
-        collectors.append(WelcomeToTheJungleCollector())
-    if source_filter in ("all", "french_tech"):
-        collectors.append(FrenchTechCollector())
+    if source_filter in ("all", "hellowork"):
+        collectors.append(HelloWorkCollector())
+    if source_filter in ("all", "1jeune1solution"):
+        collectors.append(UnJeuneUneSolutionCollector())
+    if source_filter in ("all", "web_search"):
+        collectors.append(WebSearchCollector())
 
     all_raw_offers: List[JobOffer] = []
 
@@ -134,8 +134,7 @@ def run_job_search(source_filter: str = "all", min_score: int = 40, limit: int =
         MarkdownTracker().generate_dashboard([])
         console.print(
             "[bold yellow]ℹ Aucune offre ne correspond aux critères stricts pour le moment.\n"
-            "Conseil : Renseigne tes clés France Travail dans .env pour interroger le vivier officiel, "
-            "ou lance une campagne de candidatures spontanées locales avec :[/bold yellow] [bold green]python main.py --spontaneous[/bold green]"
+            "Conseil : Ajuste le seuil avec --min-score 30 ou lance une campagne de candidatures spontanées locales avec :[/bold yellow] [bold green]python main.py --spontaneous[/bold green]"
         )
 
     return new_offers
@@ -193,11 +192,16 @@ def main():
         action="store_true",
         help="Déclencher l'envoi réel des emails via SMTP (par défaut: simulation Dry-Run sans envoi)",
     )
+    parser.add_argument(
+        "--relance",
+        action="store_true",
+        help="Vérifier et envoyer les relances J+7 des candidatures spontanées",
+    )
 
     # Mode Veille / Offres
     parser.add_argument(
         "--source",
-        choices=["all", "france_travail", "ft", "wttj", "french_tech"],
+        choices=["all", "hellowork", "1jeune1solution", "web_search"],
         default="all",
         help="Source d'offres à interroger (défaut: all)",
     )
@@ -231,6 +235,8 @@ def main():
         console.print(f"[bold green]✔[/bold green] Lettre PDF générée : [bold]{path}[/bold]")
     elif args.spontaneous:
         run_campaign(dept_filter=args.dept, live_send=args.send)
+    elif args.relance:
+        run_followups(dept_filter=args.dept, live_send=args.send)
     else:
         run_job_search(source_filter=args.source, min_score=args.min_score, limit=args.limit)
 

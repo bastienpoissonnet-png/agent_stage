@@ -11,27 +11,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
 
-class FranceTravailSettings:
-    def __init__(self):
-        self.client_id: Optional[str] = os.getenv("FRANCE_TRAVAIL_CLIENT_ID")
-        self.client_secret: Optional[str] = os.getenv("FRANCE_TRAVAIL_CLIENT_SECRET")
-        self.auth_url: str = (
-            "https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=/partenaire"
-        )
-        self.search_url: str = (
-            "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search"
-        )
-
-    @property
-    def is_configured(self) -> bool:
-        return bool(
-            self.client_id
-            and self.client_secret
-            and self.client_id != "votre_client_id_ici"
-            and self.client_secret != "votre_client_secret_ici"
-        )
-
-
 class SmtpSettings:
     def __init__(self):
         self.host: str = os.getenv("SMTP_HOST", "smtp.gmail.com")
@@ -66,7 +45,6 @@ class Settings:
         self.min_score_threshold: int = int(os.getenv("MIN_SCORE_THRESHOLD", "40"))
         self.max_offers_per_source: int = int(os.getenv("MAX_OFFERS_PER_SOURCE", "30"))
 
-        self.france_travail = FranceTravailSettings()
         self.smtp = SmtpSettings()
         self.profile: Dict[str, Any] = self._load_profile()
 

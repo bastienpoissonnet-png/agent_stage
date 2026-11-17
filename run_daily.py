@@ -30,15 +30,23 @@ def main() -> int:
     try:
         from main import run_job_search
         from config.settings import settings
+        from src.spontaneous.tracker import SpontaneousTracker
 
         log.info("=== Début de la veille quotidienne ===")
         new_offers = run_job_search(source_filter="all", min_score=settings.min_score_threshold,
                                     limit=settings.max_offers_per_source)
+        due_followups = SpontaneousTracker().get_due_followups()
         summary = ROOT / "logs" / "derniere_veille.txt"
         lines = [f"Veille du {datetime.now():%d/%m/%Y à %H:%M} : {len(new_offers)} nouvelle(s) offre(s)"]
         lines += [f"- [{o.score}] {o.title} | {o.company} | {o.location} | {o.url}" for o in new_offers]
+        lines.append(f"Relances spontanées à J+7 dues : {len(due_followups)}")
+        lines += [
+            f"- Relance due : {r.get('Entreprise')} ({r.get('Email')}, envoyée le {r.get('Date_Envoi')})"
+            for r in due_followups
+        ]
         summary.write_text("\n".join(lines), encoding="utf-8")
         log.info(lines[0])
+        log.info(f"Relances spontanées dues : {len(due_followups)}")
         log.info("=== Fin de la veille ===")
         return 0
     except Exception:
