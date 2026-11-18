@@ -98,6 +98,16 @@ SMTP_DELAY_MAX=15
 
 ## 🚀 Guide d'Utilisation
 
+### Interface Web Locale (Streamlit)
+
+Double-cliquez sur `launch_ui.bat` ou lancez depuis le terminal :
+```powershell
+.venv\Scripts\streamlit run app.py
+```
+L'interface s'ouvre dans le navigateur (`http://localhost:8501`) avec 4 onglets : **Offres publiées** (filtres, édition des statuts, scan, téléchargement des lettres PDF), **Spontanées & Relances J+7**, **Lettre à la carte** et **Veille & Modèle**.
+
+---
+
 ### Mode 1 : Veille sur les offres publiées (`HelloWork`, `1jeune1solution`, `Web Search`)
 
 ```powershell
