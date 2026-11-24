@@ -1,0 +1,16 @@
+Objet : Candidature Stage — {formation} ({periode_stage})
+
+Madame, Monsieur,
+
+Je vous écris suite à l'intérêt que porte {nom_entreprise} pour {accroche_entreprise}, domaines qui résonnent fortement avec mon parcours actuel. Étudiant(e) en {formation} à {ecole} (spécialisation {specialite}), je souhaite mettre en pratique mes connaissances et compétences ({competences_cles}).
+
+{phrase_offre}Je suis activement à la recherche d'un stage ({periode_stage}), afin de concrétiser ces acquis théoriques. Intégrer votre structure, particulièrement au sein de {equipe_cible}, me motive fortement pour contribuer à des projets tels que {projets_vises}.
+
+{experience_resume}{phrase_projet}
+
+Je souhaite apporter à votre équipe une méthodologie rigoureuse, une capacité d'apprentissage rapide et une proactivité concrète dans les missions qui me seront confiées.
+
+Dans l'attente de vous lire ou de vous rencontrer pour échanger davantage sur cette opportunité de stage, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+
+Cordialement,
+{nom_candidat}

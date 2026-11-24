@@ -100,11 +100,14 @@ SMTP_DELAY_MAX=15
 
 ### Interface Web Locale (Streamlit)
 
-Double-cliquez sur `launch_ui.bat` ou lancez depuis le terminal :
-```powershell
-.venv\Scripts\streamlit run app.py
-```
-L'interface s'ouvre dans le navigateur (`http://localhost:8501`) avec 4 onglets : **Offres publiées** (filtres, édition des statuts, scan, téléchargement des lettres PDF), **Spontanées & Relances J+7**, **Lettre à la carte** et **Veille & Modèle**.
+* **Sur Windows :** double-cliquez sur `launch_ui.bat` ou lancez `.venv\Scripts\streamlit run app.py`.
+* **Sur Mac (utilisateur tiers) :** consultez [GUIDE_INSTALLATION_MAC.md](file:///c:/Users/basti/OneDrive/Documents/stage-agent/GUIDE_INSTALLATION_MAC.md). Pour générer une archive propre sans vos données personnelles prête à envoyer sur Mac :
+  ```powershell
+  .venv\Scripts\python scripts\export_for_mac.py
+  ```
+  Cela crée `StageAgent_Pour_Mac.zip` (vierge de vos fichiers `.env`, CV et suivis).
+
+L'interface s'ouvre dans le navigateur (`http://localhost:8501`) avec 5 onglets : **Offres publiées**, **Spontanées & Relances J+7**, **Lettre à la carte**, **Veille & Modèle** et **Mon Profil**.
 
 ---
 

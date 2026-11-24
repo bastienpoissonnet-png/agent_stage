@@ -1,0 +1,59 @@
+{
+  "candidate": {
+    "name": "Prénom Nom",
+    "email": "prenom.nom@exemple.fr",
+    "phone": "06 00 00 00 00",
+    "location": "Ville (Code postal)",
+    "school": "Nom de votre école / université",
+    "degree": "Votre formation (ex: Licence 3 / Master 1 / BUT 3)",
+    "specialty": "Votre spécialité",
+    "driving_license": "",
+    "english_level": "",
+    "interests": [],
+    "cv_filename": "data/cv.pdf",
+    "project_highlight": "",
+    "experience_summary": "Mes expériences précédentes et projets académiques m'ont permis de développer autonomie, rigueur et sens du travail en équipe."
+  },
+  "search_criteria": {
+    "internship_period": "Printemps 2027 (12 à 16 semaines)",
+    "start_date": "2027-04-01",
+    "end_date": "2027-07-15",
+    "duration_weeks": 14,
+    "search_keywords": [
+      "stage",
+      "communication",
+      "marketing"
+    ],
+    "target_roles": [
+      "Stage Assistant(e)..."
+    ],
+    "target_locations": [
+      "Paris",
+      "Lyon"
+    ],
+    "target_departments": [
+      "75",
+      "69"
+    ],
+    "allow_remote": true,
+    "disallow_full_remote": false,
+    "prefer_onsite_or_hybrid": true,
+    "exclude_alternance": true,
+    "exclude_non_tech": false,
+    "excluded_title_keywords": [],
+    "bonus_sector_keywords": []
+  },
+  "skills": {
+    "core": [
+      "Gestion de projet",
+      "Excel",
+      "Rédaction"
+    ],
+    "secondary": [
+      "Canva",
+      "Anglais"
+    ],
+    "methodology": []
+  },
+  "experiences": []
+}

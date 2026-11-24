@@ -6,42 +6,46 @@ from typing import Dict, List, Optional, Set, Tuple
 from bs4 import BeautifulSoup
 import requests
 
+from config.settings import settings
 from src.collectors.base import BaseJobCollector
 from src.models import JobOffer
 
 logger = logging.getLogger("stage_agent.collectors.un_jeune_une_solution")
+
+# Correspondance des noms de départements français courants pour matcher localisationFiltree
+FR_DEPT_NAMES: Dict[str, str] = {
+    "06": "alpes-maritimes",
+    "13": "bouches-du-rhône",
+    "17": "charente-maritime",
+    "31": "haute-garonne",
+    "33": "gironde",
+    "34": "hérault",
+    "35": "ille-et-vilaine",
+    "38": "isère",
+    "44": "loire-atlantique",
+    "49": "maine-et-loire",
+    "59": "nord",
+    "67": "bas-rhin",
+    "69": "rhône",
+    "75": "paris",
+    "76": "seine-maritime",
+    "77": "seine-et-marne",
+    "78": "yvelines",
+    "79": "deux-sèvres",
+    "85": "vendée",
+    "86": "vienne",
+    "91": "essonne",
+    "92": "hauts-de-seine",
+    "93": "seine-saint-denis",
+    "94": "val-de-marne",
+    "95": "val-d'oise",
+}
 
 
 class UnJeuneUneSolutionCollector(BaseJobCollector):
     """Collecte les stages depuis les données JSON embarquées de 1jeune1solution.gouv.fr."""
 
     BASE_URL = "https://www.1jeune1solution.gouv.fr/stages"
-
-    DEPT_MAP: Dict[str, str] = {
-        "charente-maritime": "17",
-        "la rochelle": "17",
-        "deux-sèvres": "79",
-        "deux-sevres": "79",
-        "niort": "79",
-        "vendée": "85",
-        "vendee": "85",
-        "la roche-sur-yon": "85",
-        "paris": "75",
-        "hauts-de-seine": "92",
-        "seine-saint-denis": "93",
-        "val-de-marne": "94",
-    }
-
-    QUERIES: List[str] = [
-        "informatique niort",
-        "data niort",
-        "informatique la rochelle",
-        "data la rochelle",
-        "informatique vendee",
-        "data python paris",
-        "data engineer paris",
-        "intelligence artificielle paris",
-    ]
 
     def __init__(self):
         super().__init__(name="1jeune1solution")
@@ -53,25 +57,57 @@ class UnJeuneUneSolutionCollector(BaseJobCollector):
             "Accept-Language": "fr-FR,fr;q=0.9",
         }
 
-    def _match_location(self, loc_list: Optional[List[str]]) -> Tuple[bool, Optional[str], str]:
-        """Vérifie si localisationFiltree correspond aux zones cibles."""
+    def _build_queries(self) -> List[str]:
+        keywords = settings.search_keywords[:3] or ["stage"]
+        locs = [l.strip() for l in settings.target_locations if l.strip()][:4]
+        if not locs:
+            return keywords
+        queries: List[str] = []
+        for loc in locs:
+            for kw in keywords:
+                queries.append(f"{kw} {loc}")
+                if len(queries) >= 10:
+                    return queries
+        return queries
+
+    @staticmethod
+    def _match_location(loc_list: Optional[List[str]]) -> Tuple[bool, Optional[str], str]:
+        """Vérifie dynamiquement si localisationFiltree correspond aux zones du profil."""
+        target_locs = [l.strip().lower() for l in settings.target_locations if l.strip()]
+        target_depts = set(settings.target_departments)
+
         if not loc_list:
-            return False, None, ""
+            return (not target_locs and not target_depts), None, ""
+
         cleaned = [str(part).strip() for part in loc_list if part]
         joined = " ".join(cleaned).lower()
+        city = cleaned[0] if cleaned else ""
 
-        for key, dept in self.DEPT_MAP.items():
-            if key in joined:
-                city = cleaned[0] if cleaned else key.title()
-                return True, dept, city
-
-        if "île-de-france" in joined or "ile-de-france" in joined:
-            city = cleaned[0] if cleaned else "Île-de-France"
+        if not target_locs and not target_depts:
             return True, None, city
+
+        for dept in target_depts:
+            dept_name = FR_DEPT_NAMES.get(dept, "")
+            if dept_name and dept_name in joined:
+                return True, dept, city or dept_name.title()
+
+        for loc in target_locs:
+            if loc in joined:
+                return True, None, city or loc.title()
+
+        if any(d in target_depts for d in ("75", "92", "93", "94", "77", "78", "91", "95")):
+            if "île-de-france" in joined or "ile-de-france" in joined:
+                return True, None, city or "Île-de-France"
 
         return False, None, ""
 
-    def _fetch_detail(self, session: requests.Session, slug: str, fallback_city: str, fallback_dept: Optional[str]) -> Optional[JobOffer]:
+    def _fetch_detail(
+        self,
+        session: requests.Session,
+        slug: str,
+        fallback_city: str,
+        fallback_dept: Optional[str],
+    ) -> Optional[JobOffer]:
         """Charge le détail d'une offre depuis /stages/<slug>."""
         offer_url = f"{self.BASE_URL}/{slug}"
         try:
@@ -133,7 +169,7 @@ class UnJeuneUneSolutionCollector(BaseJobCollector):
         session = requests.Session()
         session.headers.update(self.headers)
 
-        for mot_cle in self.QUERIES:
+        for mot_cle in self._build_queries():
             if len(offers) >= limit:
                 break
             try:
@@ -168,8 +204,9 @@ class UnJeuneUneSolutionCollector(BaseJobCollector):
 
                     seen_slugs.add(slug)
                     title_preview = str(item.get("titre") or "").lower()
-                    if any(w in title_preview for w in ("alternance", "apprenti", "apprentissage")) and "stage" not in title_preview:
-                        continue
+                    if settings.exclude_alternance:
+                        if any(w in title_preview for w in ("alternance", "apprenti", "apprentissage")) and "stage" not in title_preview:
+                            continue
 
                     offer = self._fetch_detail(session, slug, city, dept)
                     if offer:

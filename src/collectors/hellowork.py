@@ -15,31 +15,13 @@ logger = logging.getLogger("stage_agent.collectors.hellowork")
 
 
 class HelloWorkCollector(BaseJobCollector):
-    """Collecte les offres de stage tech/data sur HelloWork sans clé API."""
+    """Collecte les offres de stage sur HelloWork selon les mots-clés et zones du profil."""
 
     BASE_URL = "https://www.hellowork.com"
     SEARCH_URL = f"{BASE_URL}/fr-fr/emploi/recherche.html"
 
-    # Zones locales prioritaires d'abord pour éviter la saturation par Paris
-    SEARCHES: List[Tuple[str, str]] = [
-        ("informatique", "Niort"),
-        ("data", "Niort"),
-        ("informatique", "Deux-Sevres"),
-        ("informatique", "La Rochelle"),
-        ("data", "La Rochelle"),
-        ("informatique", "Charente-Maritime"),
-        ("informatique", "La Roche-sur-Yon"),
-        ("informatique", "Vendee"),
-        ("data", "Vendee"),
-        ("data python", "Paris"),
-        ("intelligence artificielle", "Paris"),
-        ("data engineer", "Paris"),
-        ("data science", "Paris"),
-    ]
-
     def __init__(self):
         super().__init__(name="HelloWork")
-        self.target_depts = set(settings.target_departments)
         self.headers = {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -48,19 +30,41 @@ class HelloWorkCollector(BaseJobCollector):
             "Accept-Language": "fr-FR,fr;q=0.9",
         }
 
-    def _should_skip_card(self, link_text: str, card_text: str) -> bool:
+    def _build_searches(self) -> List[Tuple[str, str]]:
+        """Construit les couples (mot-clé, lieu) depuis settings en mettant Paris/IDF en dernier."""
+        keywords = settings.search_keywords[:4] or ["stage"]
+        raw_locs = [loc.strip() for loc in settings.target_locations if loc.strip()]
+        if not raw_locs:
+            raw_locs = ["France"]
+
+        # Trier pour éviter que Paris/Île-de-France ne sature la limite avant les villes locales
+        local_locs = [l for l in raw_locs if "paris" not in l.lower() and "île-de-france" not in l.lower() and "ile-de-france" not in l.lower()]
+        paris_locs = [l for l in raw_locs if l not in local_locs]
+        ordered_locs = (local_locs + paris_locs)[:5]
+
+        searches: List[Tuple[str, str]] = []
+        for loc in ordered_locs:
+            for kw in keywords[:3]:
+                searches.append((kw, loc))
+                if len(searches) >= 14:
+                    return searches
+        return searches
+
+    def _should_skip_card(self, link_text: str, card_text: str, target_depts: Set[str]) -> bool:
         """Écarte rapidement les cartes hors département cible ou hors sujet."""
         title_lower = link_text.lower()
         if any(bad in title_lower for bad in ("stage 3eme", "stage 3e", "stage de 3ème", "découverte")):
             return True
 
-        has_alternance = any(w in title_lower for w in ("alternance", "apprenti", "apprentissage"))
-        if has_alternance and "stage" not in title_lower:
-            return True
+        if settings.exclude_alternance:
+            has_alternance = any(w in title_lower for w in ("alternance", "apprenti", "apprentissage"))
+            if has_alternance and "stage" not in title_lower:
+                return True
 
-        dept_match = re.search(r"-\s*(\d{2,3})\b", card_text)
-        if dept_match and dept_match.group(1) not in self.target_depts:
-            return True
+        if target_depts:
+            dept_match = re.search(r"-\s*(\d{2,3})\b", card_text)
+            if dept_match and dept_match.group(1) not in target_depts:
+                return True
 
         return False
 
@@ -137,10 +141,13 @@ class HelloWorkCollector(BaseJobCollector):
         """Parcourt les recherches HelloWork et extrait les offres de stage qualifiées."""
         offers: List[JobOffer] = []
         seen_paths: Set[str] = set()
+        target_depts = set(settings.target_departments)
+        searches = self._build_searches()
+
         session = requests.Session()
         session.headers.update(self.headers)
 
-        for keyword, location in self.SEARCHES:
+        for keyword, location in searches:
             if len(offers) >= limit:
                 break
             try:
@@ -166,12 +173,12 @@ class HelloWorkCollector(BaseJobCollector):
                     card_text = li.get_text(" | ", strip=True) if li else link.get_text(" ", strip=True)
                     link_text = link.get_text(" ", strip=True)
 
-                    if "résultats proches" in card_text.lower():
+                    if target_depts and "résultats proches" in card_text.lower():
                         dept_match = re.search(r"-\s*(\d{2,3})\b", card_text)
-                        if not dept_match or dept_match.group(1) not in self.target_depts:
+                        if not dept_match or dept_match.group(1) not in target_depts:
                             continue
 
-                    if self._should_skip_card(link_text, card_text):
+                    if self._should_skip_card(link_text, card_text, target_depts):
                         continue
 
                     full_url = f"{self.BASE_URL}{rel_path}"

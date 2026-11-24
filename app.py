@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import re
+import threading
 from typing import List
 
 import pandas as pd
@@ -74,26 +75,19 @@ def _sync_markdown_from_df(df: pd.DataFrame) -> None:
     MarkdownTracker().generate_dashboard(offers)
 
 
-def _find_cv_path() -> Path:
-    for name in ("CV_Bastien_Poissonnet.pdf", "cv.pdf"):
-        p = settings.project_root / name
-        if p.exists():
-            return p
-    return settings.project_root / "CV_Bastien_Poissonnet.pdf"
-
-
 def render_sidebar() -> None:
     candidate = settings.profile.get("candidate", {})
     search = settings.profile.get("search_criteria", {})
-    cv_path = _find_cv_path()
+    cv_path = settings.cv_path
 
     with st.sidebar:
         st.title("🎯 Stage Agent")
+        zones_display = ", ".join(settings.target_departments) or ", ".join(settings.target_locations) or "Toute la France"
         st.markdown(
-            f"**{candidate.get('name', 'Bastien Poissonnet')}**  \n"
-            f"{candidate.get('degree', 'BUT Informatique')} — {candidate.get('school', 'IUT Niortech')}  \n"
-            f"📅 {search.get('internship_period', '22 mars - 25 juin 2027')}  \n"
-            f"📍 Zones : `{', '.join(settings.target_departments)}`"
+            f"**{candidate.get('name', 'Profil non configuré')}**  \n"
+            f"{candidate.get('degree', '')} — {candidate.get('school', '')}  \n"
+            f"📅 {search.get('internship_period', '')}  \n"
+            f"📍 Zones : `{zones_display}`"
         )
 
         st.divider()
@@ -101,12 +95,12 @@ def render_sidebar() -> None:
         if cv_path.exists():
             st.success(f"CV prêt : `{cv_path.name}`")
         else:
-            st.error("CV introuvable (`CV_Bastien_Poissonnet.pdf`)")
+            st.warning("Aucun CV importé — ajoute ton CV dans l'onglet **⚙️ Mon Profil**")
 
         if settings.smtp.is_configured:
-            st.success(f"SMTP prêt : `{settings.smtp.sender_email}`")
+            st.success(f"SMTP prêt : `{settings.smtp.sender_email or settings.smtp.user}`")
         else:
-            st.warning("SMTP non configuré dans `.env` (mode Dry-Run uniquement)")
+            st.info("SMTP non configuré (brouillons manuels ou simulation Dry-Run)")
 
         st.divider()
         st.subheader("🔎 Lancer un scan d'offres")
@@ -130,6 +124,11 @@ def render_sidebar() -> None:
 
         if st.session_state.get("last_scan_msg"):
             st.success(st.session_state["last_scan_msg"])
+
+        st.divider()
+        if st.button("⏻ Fermer l'application", width="stretch"):
+            st.info("Arrêt de Stage Agent... Tu peux fermer cet onglet du navigateur.")
+            threading.Timer(0.6, os._exit, args=[0]).start()
 
 
 def render_offers_tab() -> None:
@@ -339,7 +338,8 @@ def render_spontaneous_tab() -> None:
 
     # 2. Campagne spontanée
     st.subheader("🚀 Lancer une vague de candidatures spontanées")
-    dept_choice = st.selectbox("Filtrer par département", ["Tous", "17", "79", "85", "75"])
+    avail_depts = sorted({c.department for c in companies if c.department})
+    dept_choice = st.selectbox("Filtrer par département", ["Tous"] + avail_depts)
     selected_companies = (
         companies if dept_choice == "Tous" else [c for c in companies if c.department == dept_choice]
     )
@@ -364,6 +364,24 @@ def render_spontaneous_tab() -> None:
         with st.expander("👁️ Aperçu de l'e-mail et de la lettre jointe"):
             st.markdown(f"**Objet :** `{preview_app.subject}`")
             st.text(preview_app.body)
+            m1, m2 = st.columns(2)
+            m1.link_button(
+                "📧 Ouvrir le brouillon dans ma messagerie",
+                SmtpMailer.build_mailto_url(preview_app),
+                width="stretch",
+            )
+            if m2.button("📄 Générer la lettre PDF pour cette entreprise", key="gen_single_spont_pdf", width="stretch"):
+                pdf_p = letter_gen.export_pdf(preview_ctx)
+                st.session_state["single_spont_pdf"] = str(pdf_p)
+            saved_spont = st.session_state.get("single_spont_pdf")
+            if saved_spont and Path(saved_spont).exists():
+                sp = Path(saved_spont)
+                st.download_button(
+                    f"📥 Télécharger {sp.name}",
+                    data=sp.read_bytes(),
+                    file_name=sp.name,
+                    mime="application/pdf",
+                )
             st.markdown("**Lettre PDF générée :**")
             st.text(letter_gen.render(preview_ctx))
 
@@ -540,14 +558,168 @@ def render_daily_tab() -> None:
         st.success("Modèle `data/lettre_type.txt` mis à jour.")
 
 
+def render_profile_tab() -> None:
+    st.header("⚙️ Mon Profil & Paramètres")
+    profile = settings.profile
+    cand = profile.get("candidate", {})
+    search = profile.get("search_criteria", {})
+    skills = profile.get("skills", {})
+
+    with st.form("profile_form"):
+        st.subheader("👤 Identité & Formation")
+        c1, c2 = st.columns(2)
+        name = c1.text_input("Prénom et Nom *", value=cand.get("name", ""))
+        email = c2.text_input("Adresse e-mail *", value=cand.get("email", ""))
+        phone = c1.text_input("Téléphone", value=cand.get("phone", ""))
+        location = c2.text_input("Adresse / Ville", value=cand.get("location", ""))
+        degree = c1.text_input("Formation / Niveau", value=cand.get("degree", ""))
+        specialty = c2.text_input("Spécialité", value=cand.get("specialty", ""))
+        school = c1.text_input("École / Université", value=cand.get("school", ""))
+        period = c2.text_input("Période de stage souhaitée", value=search.get("internship_period", ""))
+
+        st.subheader("🔎 Critères de recherche & Filtres")
+        k1, k2 = st.columns(2)
+        keywords_raw = k1.text_input(
+            "Mots-clés de recherche (séparés par des virgules)",
+            value=", ".join(search.get("search_keywords", [])),
+            help="Ex: marketing, communication, digital",
+        )
+        locs_raw = k2.text_input(
+            "Villes / régions cibles (séparées par des virgules)",
+            value=", ".join(search.get("target_locations", [])),
+            help="Ex: Paris, Lyon, Nantes",
+        )
+        depts_raw = k1.text_input(
+            "Codes départements (séparés par des virgules)",
+            value=", ".join(str(d) for d in search.get("target_departments", [])),
+            help="Ex: 75, 92, 69 (laisser vide pour toute la France)",
+        )
+        excluded_raw = k2.text_input(
+            "Mots à exclure des intitulés (optionnel, séparés par des virgules)",
+            value=", ".join(search.get("excluded_title_keywords", [])),
+        )
+
+        f1, f2, f3 = st.columns(3)
+        excl_alt = f1.checkbox("Stages uniquement (exclure alternances)", value=bool(search.get("exclude_alternance", True)))
+        no_full_remote = f2.checkbox("Exclure le 100 % télétravail", value=bool(search.get("disallow_full_remote", True)))
+        excl_non_tech = f3.checkbox("Exclure les métiers non-tech (mode IT/Data)", value=bool(search.get("exclude_non_tech", True)))
+
+        st.subheader("🛠️ Compétences & Atouts (pour le scoring et les lettres)")
+        s1, s2 = st.columns(2)
+        core_raw = s1.text_input(
+            "Compétences principales (+10 pts)",
+            value=", ".join(skills.get("core", [])),
+        )
+        sec_raw = s2.text_input(
+            "Compétences complémentaires (+5 pts)",
+            value=", ".join(skills.get("secondary", [])),
+        )
+        exp_summary = st.text_area(
+            "Résumé de tes expériences (utilisé si ton modèle de lettre contient `{experience_resume}`)",
+            value=cand.get("experience_summary", ""),
+            height=80,
+        )
+        project_highlight = st.text_area(
+            "Projet marquant à mettre en avant dans la lettre (optionnel)",
+            value=cand.get("project_highlight", ""),
+            height=80,
+        )
+
+        if st.form_submit_button("💾 Enregistrer mon profil", type="primary"):
+            def _split(txt: str) -> List[str]:
+                return [x.strip() for x in txt.split(",") if x.strip()]
+
+            new_profile = dict(profile)
+            new_profile["candidate"] = {
+                **cand,
+                "name": name.strip(),
+                "email": email.strip(),
+                "phone": phone.strip(),
+                "location": location.strip(),
+                "degree": degree.strip(),
+                "specialty": specialty.strip(),
+                "school": school.strip(),
+                "experience_summary": exp_summary.strip(),
+                "project_highlight": project_highlight.strip(),
+            }
+            new_profile["search_criteria"] = {
+                **search,
+                "internship_period": period.strip(),
+                "search_keywords": _split(keywords_raw),
+                "target_locations": _split(locs_raw),
+                "target_departments": _split(depts_raw),
+                "excluded_title_keywords": _split(excluded_raw),
+                "exclude_alternance": excl_alt,
+                "disallow_full_remote": no_full_remote,
+                "allow_remote": not no_full_remote,
+                "exclude_non_tech": excl_non_tech,
+            }
+            new_profile["skills"] = {
+                **skills,
+                "core": _split(core_raw),
+                "secondary": _split(sec_raw),
+            }
+            settings.save_profile(new_profile)
+            st.success("Profil enregistré et appliqué immédiatement.")
+            st.rerun()
+
+    st.divider()
+    st.subheader("📎 Mon CV (PDF)")
+    uploaded_cv = st.file_uploader("Importer ou remplacer mon CV au format PDF", type=["pdf"])
+    if uploaded_cv is not None:
+        settings.data_dir.mkdir(parents=True, exist_ok=True)
+        dest_cv = settings.data_dir / "cv.pdf"
+        dest_cv.write_bytes(uploaded_cv.getvalue())
+        updated = dict(settings.profile)
+        updated.setdefault("candidate", {})["cv_filename"] = "data/cv.pdf"
+        settings.save_profile(updated)
+        st.success("CV enregistré (`data/cv.pdf`). Il sera joint automatiquement à tes envois.")
+        st.rerun()
+
+    st.divider()
+    with st.expander("📧 Configuration e-mail automatique (SMTP — optionnel)"):
+        st.caption(
+            "Nécessaire uniquement pour l'envoi automatique en masse. "
+            "Sinon, utilise le bouton « Ouvrir le brouillon dans ma messagerie » dans l'onglet Spontanées."
+        )
+        with st.form("smtp_form"):
+            sc1, sc2 = st.columns(2)
+            smtp_host = sc1.text_input("Serveur SMTP", value=settings.smtp.host)
+            smtp_port = sc2.number_input("Port SMTP", min_value=1, max_value=65535, value=int(settings.smtp.port))
+            smtp_user = sc1.text_input("E-mail de connexion", value=settings.smtp.user or "")
+            smtp_pass = sc2.text_input("Mot de passe d'application", value=settings.smtp.password or "", type="password")
+            sender_name = sc1.text_input("Nom affiché", value=settings.smtp.sender_name or cand.get("name", ""))
+            sender_email = sc2.text_input("E-mail expéditeur", value=settings.smtp.sender_email or cand.get("email", ""))
+            if st.form_submit_button("💾 Enregistrer la config SMTP"):
+                settings.save_smtp_config(smtp_host, int(smtp_port), smtp_user, smtp_pass, sender_email, sender_name)
+                st.success("Paramètres SMTP enregistrés dans `.env`.")
+                st.rerun()
+
+    st.divider()
+    with st.expander("🔄 Réinitialiser mes tableaux (nouveau départ / nouvel utilisateur)"):
+        st.warning("Supprime toutes les offres et suivis actuels (`candidatures.csv`, `suivi_spontanees.csv`, `letters/*.pdf`).")
+        confirm_reset = st.checkbox("Je confirme vouloir repartir de zéro", key="confirm_reset_all")
+        if st.button("🗑️ Tout réinitialiser", disabled=not confirm_reset):
+            settings.csv_output_path.write_text(",".join(CsvTracker.FIELDNAMES) + "\n", encoding="utf-8-sig")
+            settings.spontaneous_csv_path.write_text(",".join(SpontaneousTracker.FIELDNAMES) + "\n", encoding="utf-8-sig")
+            letters_dir = settings.project_root / "letters"
+            if letters_dir.exists():
+                for pdf in letters_dir.glob("*.pdf"):
+                    pdf.unlink()
+            MarkdownTracker().generate_dashboard([])
+            st.success("Tableaux et lettres réinitialisés.")
+            st.rerun()
+
+
 def main() -> None:
     render_sidebar()
-    tab1, tab2, tab3, tab4 = st.tabs(
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
         [
             "🚀 Offres Publiées",
             "📬 Spontanées & Relances J+7",
             "✉️ Lettre à la Carte",
             "⏰ Veille & Modèle",
+            "⚙️ Mon Profil",
         ]
     )
     with tab1:
@@ -558,6 +730,8 @@ def main() -> None:
         render_letter_tab()
     with tab4:
         render_daily_tab()
+    with tab5:
+        render_profile_tab()
 
 
 if __name__ == "__main__":

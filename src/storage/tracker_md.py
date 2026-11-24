@@ -38,13 +38,21 @@ class MarkdownTracker:
         for o in offers:
             status_counts[o.status] = status_counts.get(o.status, 0) + 1
 
+        degree = self.candidate.get("degree", "Stage")
+        specialty = self.candidate.get("specialty", "")
+        zones = ", ".join(settings.target_locations) or "France"
+        if settings.target_departments:
+            zones = f"{zones} ({', '.join(settings.target_departments)})"
+        work_mode = "Présentiel ou Hybride (Full remote exclu)" if settings.disallow_full_remote else "Présentiel, Hybride ou Télétravail"
+
         md_content = []
-        md_content.append("# 🎯 Suivi des Candidatures de Stage — BUT 3 Data & IA\n")
+        title_suffix = f"{degree} — {specialty}" if specialty else degree
+        md_content.append(f"# 🎯 Suivi des Candidatures de Stage — {title_suffix}\n")
         md_content.append(
-            f"> **Candidat :** {self.candidate.get('name', 'Bastien Poissonnet')}  \n"
-            f"> **Période cible :** {self.search.get('internship_period', '22 mars 2027 - fin juin 2027')}  \n"
-            f"> **Zones cibles :** La Rochelle (17), Niort (79), La Roche-sur-Yon (85), Paris / IDF (75)  \n"
-            f"> **Mode :** Présentiel ou Hybride (Full remote exclu)  \n"
+            f"> **Candidat :** {self.candidate.get('name', '')}  \n"
+            f"> **Période cible :** {self.search.get('internship_period', '')}  \n"
+            f"> **Zones cibles :** {zones}  \n"
+            f"> **Mode :** {work_mode}  \n"
             f"> **Dernière mise à jour :** {now_str}\n"
         )
 

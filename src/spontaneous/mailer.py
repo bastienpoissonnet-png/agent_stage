@@ -1,4 +1,4 @@
-"""Module d'envoi d'emails via SMTP avec mode Dry-Run et temporisation anti-spam."""
+"""Module d'envoi d'emails via SMTP avec mode Dry-Run, temporisation anti-spam et lien mailto."""
 
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
@@ -6,9 +6,10 @@ from email.mime.text import MIMEText
 import logging
 from pathlib import Path
 import random
+import re
 import smtplib
 import time
-from typing import Optional
+from urllib.parse import quote
 
 from config.settings import settings
 from src.spontaneous.models import SpontaneousApplication
@@ -22,17 +23,26 @@ class SmtpMailer:
     def __init__(self, dry_run: bool = True):
         self.dry_run = dry_run
         self.smtp_settings = settings.smtp
-        candidates = [
-            settings.project_root / "CV_Bastien_Poissonnet.pdf",
-            settings.project_root / "cv.pdf",
-        ]
-        self.cv_path: Path = next((p for p in candidates if p.exists()), candidates[0])
+        self.cv_path: Path = settings.cv_path
+
+    @staticmethod
+    def _safe_candidate_slug() -> str:
+        raw = settings.candidate_name.strip() or "Candidat"
+        return re.sub(r"[^A-Za-z0-9]+", "_", raw).strip("_") or "Candidat"
+
+    @staticmethod
+    def build_mailto_url(app: SpontaneousApplication) -> str:
+        """Construit un lien mailto: pré-rempli pour ouvrir un brouillon dans la messagerie locale."""
+        subject = quote(app.subject, safe="")
+        body = quote(app.body, safe="")
+        to = quote(app.contact_email.strip(), safe="@.")
+        return f"mailto:{to}?subject={subject}&body={body}"
 
     def send_application(self, app: SpontaneousApplication) -> bool:
         """Envoie une candidature spontanée par email (ou simule l'envoi en dry-run)."""
         logger.info(f"Préparation email pour {app.company_name} <{app.contact_email}>...")
+        self.cv_path = settings.cv_path
 
-        # Mode simulation (Dry-Run)
         if self.dry_run:
             logger.info(
                 f"[DRY-RUN] Email simulé pour {app.company_name} ({app.contact_email}) : "
@@ -40,7 +50,6 @@ class SmtpMailer:
             )
             return True
 
-        # Mode envoi réel
         if not self.smtp_settings.is_configured:
             logger.error(
                 "Impossible d'envoyer l'email : identifiants SMTP non configurés dans le fichier .env ! "
@@ -49,37 +58,36 @@ class SmtpMailer:
             return False
 
         try:
+            slug = self._safe_candidate_slug()
+            sender_name = self.smtp_settings.sender_name or settings.candidate_name or self.smtp_settings.user
+            sender_email = self.smtp_settings.sender_email or self.smtp_settings.user
+
             msg = MIMEMultipart()
-            msg["From"] = f"{self.smtp_settings.sender_name} <{self.smtp_settings.sender_email}>"
+            msg["From"] = f"{sender_name} <{sender_email}>"
             msg["To"] = app.contact_email
             msg["Subject"] = app.subject
-
-            # Corps du message en texte brut
             msg.attach(MIMEText(app.body, "plain", "utf-8"))
 
-            # Lettre de motivation personnalisée en pièce jointe
             if app.letter_path and Path(app.letter_path).exists():
                 with open(app.letter_path, "rb") as f:
                     letter = MIMEApplication(f.read(), _subtype="pdf")
                     letter.add_header(
                         "Content-Disposition",
                         "attachment",
-                        filename="Lettre_Motivation_Bastien_Poissonnet.pdf",
+                        filename=f"Lettre_Motivation_{slug}.pdf",
                     )
                     msg.attach(letter)
 
-            # Ajout de la pièce jointe cv.pdf si présente
             if self.cv_path.exists():
                 with open(self.cv_path, "rb") as f:
                     attach = MIMEApplication(f.read(), _subtype="pdf")
                     attach.add_header(
                         "Content-Disposition",
                         "attachment",
-                        filename="CV_Bastien_Poissonnet_BUT_Data_IA.pdf",
+                        filename=f"CV_{slug}.pdf",
                     )
                     msg.attach(attach)
 
-            # Connexion au serveur SMTP (SSL ou STARTTLS selon port)
             if self.smtp_settings.port == 465:
                 server = smtplib.SMTP_SSL(self.smtp_settings.host, self.smtp_settings.port, timeout=15)
             else:
@@ -91,8 +99,6 @@ class SmtpMailer:
             server.quit()
 
             logger.info(f"[ENVOI RÉEL RÉUSSI] Email transmis à {app.company_name} ({app.contact_email})")
-
-            # Temporisation aléatoire anti-spam entre deux envois
             delay = random.uniform(self.smtp_settings.delay_min, self.smtp_settings.delay_max)
             logger.info(f"Temporisation anti-spam : pause de {delay:.1f} secondes...")
             time.sleep(delay)
@@ -101,4 +107,3 @@ class SmtpMailer:
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du mail à {app.company_name} : {e}")
             return False
-

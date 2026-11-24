@@ -9,13 +9,27 @@
     "specialty": "DATA / IA (Administration, Gestion et Exploitation des Données)",
     "driving_license": "Permis de conduire (B)",
     "english_level": "B1 (Woofing UK, séjours Allemagne/Espagne)",
-    "interests": ["Informatique", "Travail d'équipe", "Football", "Padel", "Course à pied", "Vélo"]
+    "interests": ["Informatique", "Travail d'équipe", "Football", "Padel", "Course à pied", "Vélo"],
+    "cv_filename": "CV_Bastien_Poissonnet.pdf",
+    "project_highlight": "Mon projet tutoré 2026-2027, mené en équipe de 4, consiste à entraîner des modèles d'IA pour rendre autonome un bras robot LeRobot chargé de trier des déchets (création de datasets sur mesure, entraînement, test, enrichissement ou correction), ce qui m'a directement confronté aux enjeux concrets de la donnée et de l'IA."
   },
   "search_criteria": {
     "internship_period": "22 mars 2027 - 25 juin 2027 (14 semaines)",
     "start_date": "2027-03-22",
     "end_date": "2027-06-25",
     "duration_weeks": 14,
+    "search_keywords": [
+      "informatique",
+      "data",
+      "data python",
+      "intelligence artificielle",
+      "data engineer",
+      "data science"
+    ],
+    "exclude_alternance": true,
+    "exclude_non_tech": true,
+    "excluded_title_keywords": [],
+    "bonus_sector_keywords": ["saas", "erp", "logiciel de gestion", "éditeur", "orisha"],
     "target_roles": [
       "Stage Data Engineer",
       "Stage Développeur Data & IA",

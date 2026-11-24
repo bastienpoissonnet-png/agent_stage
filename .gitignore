@@ -21,5 +21,7 @@ Thumbs.db
 # Logs & temp
 *.log
 
-letters/
-logs/
+/letters/
+/logs/
+StageAgent_Pour_Mac.zip
+data/cv.pdf

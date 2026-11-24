@@ -1,8 +1,4 @@
-"""Générateur d'e-mails d'accompagnement pour les candidatures spontanées.
-
-Le fond de la candidature est porté par la lettre de motivation PDF personnalisée
-(src/letters). Le mail reste court et factuel.
-"""
+"""Générateur d'e-mails d'accompagnement dynamiques pour les candidatures spontanées."""
 
 import logging
 from config.settings import settings
@@ -12,23 +8,38 @@ logger = logging.getLogger("stage_agent.spontaneous.pitch")
 
 
 class SpontaneousPitchGenerator:
-    """Génère l'objet et le corps du mail d'accompagnement."""
+    """Génère l'objet et le corps du mail d'accompagnement à partir du profil."""
 
-    def __init__(self):
-        self.candidate = settings.profile.get("candidate", {})
+    @staticmethod
+    def _profile_fields():
+        candidate = settings.profile.get("candidate", {})
+        search = settings.profile.get("search_criteria", {})
+        name = candidate.get("name", "").strip() or "Candidat"
+        degree = candidate.get("degree", "").strip() or "Formation"
+        specialty = candidate.get("specialty", "").strip()
+        school = candidate.get("school", "").strip()
+        period = search.get("internship_period", "").strip()
+        phone = candidate.get("phone", "").strip()
+        email = candidate.get("email", "").strip()
+        return name, degree, specialty, school, period, phone, email
 
     def generate_application(self, company: TargetCompany) -> SpontaneousApplication:
-        subject = "Candidature spontanée – Stage BUT Informatique DATA/IA (22 mars - 25 juin 2027) – Bastien Poissonnet"
+        name, degree, specialty, school, period, phone, email = self._profile_fields()
+        spec_part = f" (spécialité {specialty})" if specialty else ""
+        school_part = f" à {school}" if school else ""
+        period_part = f" ({period})" if period else ""
+        contact_line = " | ".join(x for x in (phone, email) if x)
 
+        subject = f"Candidature spontanée – Stage {degree}{period_part} – {name}"
         body = (
             "Madame, Monsieur,\n\n"
-            "Étudiant en 3ème année de BUT Informatique (spécialité DATA/IA) à l'IUT de La Rochelle, site de Niort, "
-            f"je vous adresse ma candidature spontanée pour un stage de 14 semaines, du 22 mars au 25 juin 2027, au sein de {company.name}.\n\n"
+            f"Étudiant(e) en {degree}{spec_part}{school_part}, "
+            f"je vous adresse ma candidature spontanée pour un stage{period_part} au sein de {company.name}.\n\n"
             "Vous trouverez ci-joints ma lettre de motivation et mon CV. "
             "Je reste disponible pour échanger par téléphone ou en visio.\n\n"
             "Cordialement,\n"
-            f"{self.candidate.get('name', 'Bastien Poissonnet')}\n"
-            f"{self.candidate.get('phone', '')} | {self.candidate.get('email', '')}"
+            f"{name}"
+            + (f"\n{contact_line}" if contact_line else "")
         )
 
         return SpontaneousApplication(
@@ -50,16 +61,21 @@ class SpontaneousPitchGenerator:
         notes: str = "",
     ) -> SpontaneousApplication:
         """Génère l'e-mail de relance à J+7 pour une candidature déjà envoyée."""
-        subject = "Relance – Candidature Stage BUT Informatique DATA/IA (22 mars - 25 juin 2027) – Bastien Poissonnet"
+        name, degree, specialty, school, period, phone, email = self._profile_fields()
+        spec_part = f" (spécialité {specialty})" if specialty else ""
+        period_part = f" ({period})" if period else ""
+        contact_line = " | ".join(x for x in (phone, email) if x)
+
+        subject = f"Relance – Candidature Stage {degree}{period_part} – {name}"
         body = (
             "Madame, Monsieur,\n\n"
             f"Je me permets de revenir vers vous suite à ma candidature spontanée envoyée le {sent_date} "
-            f"pour un stage de 14 semaines en 3ème année de BUT Informatique (spécialité DATA/IA, du 22 mars au 25 juin 2027) au sein de {company_name}.\n\n"
-            "Toujours très motivé à l'idée de rejoindre votre équipe, je vous joins à nouveau ma lettre de motivation et mon CV. "
+            f"pour un stage en {degree}{spec_part}{period_part} au sein de {company_name}.\n\n"
+            "Toujours très motivé(e) à l'idée de rejoindre votre équipe, je vous joins à nouveau ma lettre de motivation et mon CV. "
             "Je reste à votre disposition pour échanger par téléphone ou en visio.\n\n"
             "Cordialement,\n"
-            f"{self.candidate.get('name', 'Bastien Poissonnet')}\n"
-            f"{self.candidate.get('phone', '')} | {self.candidate.get('email', '')}"
+            f"{name}"
+            + (f"\n{contact_line}" if contact_line else "")
         )
         return SpontaneousApplication(
             company_name=company_name,

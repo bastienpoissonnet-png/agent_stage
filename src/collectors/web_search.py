@@ -5,6 +5,7 @@ import re
 from typing import List, Set
 from ddgs import DDGS
 
+from config.settings import settings
 from src.collectors.base import BaseJobCollector
 from src.models import JobOffer
 
@@ -14,35 +15,36 @@ logger = logging.getLogger("stage_agent.collectors.web_search")
 class WebSearchCollector(BaseJobCollector):
     """Repère les offres de stage indexées sur Welcome to the Jungle via DuckDuckGo."""
 
-    QUERIES = [
-        'stage data python Paris site:welcometothejungle.com/fr/companies',
-        'stage intelligence artificielle Paris site:welcometothejungle.com/fr/companies',
-        'stage informatique Niort OR "La Rochelle" site:welcometothejungle.com/fr/companies',
-    ]
-
     def __init__(self):
         super().__init__(name="Web Search (WTTJ / JobTeaser)")
+
+    @staticmethod
+    def _build_queries() -> List[str]:
+        kws = settings.search_keywords[:2] or ["stage"]
+        locs = [l.strip() for l in settings.target_locations if l.strip()][:3]
+        queries: List[str] = []
+        if locs:
+            loc_expr = " OR ".join(f'"{l}"' for l in locs)
+            for kw in kws:
+                queries.append(f'stage {kw} {loc_expr} site:welcometothejungle.com/fr/companies')
+        else:
+            for kw in kws:
+                queries.append(f'stage {kw} site:welcometothejungle.com/fr/companies')
+        return queries
 
     @staticmethod
     def _extract_company_from_url(url: str) -> str:
         match = re.search(r"/companies/([^/]+)/jobs/", url)
         if not match:
-            return "Entreprise Tech"
+            return "Entreprise"
         return match.group(1).replace("-", " ").title()
 
     @staticmethod
     def _infer_location(text: str) -> str:
         text_lower = text.lower()
-        for city, label in [
-            ("la rochelle", "17 - La Rochelle"),
-            ("niort", "79 - Niort"),
-            ("la roche-sur-yon", "85 - La Roche-sur-Yon"),
-            ("paris", "75 - Paris"),
-            ("île-de-france", "Île-de-France"),
-            ("ile-de-france", "Île-de-France"),
-        ]:
-            if city in text_lower:
-                return label
+        for loc in settings.target_locations:
+            if loc.strip() and loc.strip().lower() in text_lower:
+                return loc.strip()
         return "France"
 
     def fetch_offers(self, limit: int = 30) -> List[JobOffer]:
@@ -52,7 +54,7 @@ class WebSearchCollector(BaseJobCollector):
 
         try:
             with DDGS() as ddgs:
-                for query in self.QUERIES:
+                for query in self._build_queries():
                     if len(offers) >= limit:
                         break
                     try:
@@ -75,9 +77,7 @@ class WebSearchCollector(BaseJobCollector):
                         title = re.sub(r"\s*[-–|]\s*Welcome to the Jungle.*$", "", raw_title, flags=re.I).strip()
                         snippet = self.clean_html(item.get("body") or "")
                         company = self._extract_company_from_url(href)
-                        location = self._infer_location(f"{raw_title} {snippet} {query}")
-                        dept_match = re.match(r"^(\d{2})\s*-", location)
-                        dept = dept_match.group(1) if dept_match else None
+                        location = self._infer_location(f"{raw_title} {snippet}")
 
                         offer_id = JobOffer.generate_id(self.name, title, company, href)
                         offers.append(
@@ -86,7 +86,6 @@ class WebSearchCollector(BaseJobCollector):
                                 title=title,
                                 company=company,
                                 location=location,
-                                department=dept,
                                 is_remote="full remote" in snippet.lower() or "100% remote" in snippet.lower(),
                                 url=href,
                                 source=self.name,
